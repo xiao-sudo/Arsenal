@@ -20,8 +20,13 @@ namespace Code.Arsenal.Trigger.Editor
 
         private void RemoveEmptyOrParentTriggers()
         {
+            if (null == serializedObject.targetObject)
+                return;
+
             if (null == m_ChildTriggerProperty)
                 return;
+
+            serializedObject.Update();
 
             for (var i = m_ChildTriggerProperty.arraySize - 1; i >= 0; --i)
             {
@@ -30,13 +35,14 @@ namespace Code.Arsenal.Trigger.Editor
                 if (null == element.objectReferenceValue)
                 {
                     m_ChildTriggerProperty.DeleteArrayElementAtIndex(i);
-                    continue;
                 }
-
-                var trigger = element.objectReferenceValue as BehaviourTrigger;
-                if (null == trigger || trigger == target)
+                else
                 {
-                    m_ChildTriggerProperty.DeleteArrayElementAtIndex(i);
+                    var trigger = element.objectReferenceValue as BehaviourTrigger;
+                    if (null == trigger || trigger == target)
+                    {
+                        m_ChildTriggerProperty.DeleteArrayElementAtIndex(i);
+                    }
                 }
             }
 

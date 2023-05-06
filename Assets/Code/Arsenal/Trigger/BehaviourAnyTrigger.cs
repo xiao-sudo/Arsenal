@@ -2,7 +2,7 @@
 
 namespace Code.Arsenal.Trigger
 {
-    public class BehaviourAnyTrigger : BehaviourTrigger, ITriggerContainer<BehaviourTrigger>
+    public class BehaviourAnyTrigger : ConditionTrigger, ITriggerContainer<BehaviourTrigger>
     {
         [SerializeField]
         protected BehaviourTrigger[] m_ChildTriggers;

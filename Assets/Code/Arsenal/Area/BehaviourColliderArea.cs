@@ -8,6 +8,13 @@ namespace Code.Arsenal.Area
     {
         private readonly HashSet<IAreaTourist> m_InAreaTourists = new();
 
+        private void Awake()
+        {
+            // set area collider to trigger, prevent physical collision
+            var area_collider = GetComponent<Collider>();
+            area_collider.isTrigger = true;
+        }
+
         public override bool IsTouristInArea(IAreaTourist area_tourist)
         {
             return m_InAreaTourists.Contains(area_tourist);

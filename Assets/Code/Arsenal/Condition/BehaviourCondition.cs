@@ -6,9 +6,4 @@ namespace Code.Arsenal.Condition
     {
         public virtual bool Eval() => true;
     }
-
-    public abstract class BehaviourParamCondition<T> : MonoBehaviour, IParamCondition<T>
-    {
-        public bool Eval(T param) => true;
-    }
 }

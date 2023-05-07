@@ -18,7 +18,12 @@ namespace Code.Arsenal.Trigger
 
         private void OnTouristEnter(IAreaTourist area_tourist)
         {
-            TryFire(area_tourist);
+            FireAreaTrigger(area_tourist);
+        }
+
+        protected virtual void FireAreaTrigger(IAreaTourist area_tourist)
+        {
+            TryFire(null);
         }
     }
 }

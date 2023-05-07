@@ -3,29 +3,62 @@ using UnityEngine;
 
 namespace Code.Arsenal.Trigger
 {
+    /// <summary>
+    /// Trigger interface
+    /// </summary>
     public interface ITrigger
     {
+        /// <summary>
+        /// If the trigger can fire
+        /// </summary>
         bool CanFire { get; }
 
+        /// <summary>
+        /// The actual event to be fired
+        /// </summary>
         public Action<object> FireEvent { get; set; }
     }
 
+    /// <summary>
+    /// Fire interface
+    /// </summary>
     public interface IFire
     {
+        /// <summary>
+        /// Try Fire actual event
+        /// </summary>
+        /// <param name="payload">event payload</param>
+        /// <returns>true if the actual event can be fired</returns>
         bool TryFire(object payload);
     }
 
+    /// <summary>
+    /// A fireable trigger interface
+    /// </summary>
     public interface IFireableTrigger : ITrigger, IFire
     {
     }
 
+    /// <summary>
+    /// A fireable trigger container
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface ITriggerContainer<out T> where T : IFireableTrigger
     {
-        T[] ChildTriggers { get; }
+        /// <summary>
+        /// Trigger elems in this container
+        /// </summary>
+        T[] SubTriggers { get; }
     }
 
+    /// <summary>
+    /// Fire counter interface
+    /// </summary>
     public interface IFireCounter
     {
+        /// <summary>
+        /// Fire count
+        /// </summary>
         int FireCount { get; }
     }
 

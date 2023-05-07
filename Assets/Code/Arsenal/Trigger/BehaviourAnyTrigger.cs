@@ -11,9 +11,9 @@ namespace Code.Arsenal.Trigger
         {
             base.Init();
 
-            if (null != ChildTriggers)
+            if (null != SubTriggers)
             {
-                foreach (var trigger in ChildTriggers)
+                foreach (var trigger in SubTriggers)
                 {
                     // ignore self, avoid infinite loop
                     if (null != trigger && trigger != this)
@@ -27,6 +27,6 @@ namespace Code.Arsenal.Trigger
             TryFire(payload);
         }
 
-        public BehaviourTrigger[] ChildTriggers => m_ChildTriggers;
+        public BehaviourTrigger[] SubTriggers => m_ChildTriggers;
     }
 }

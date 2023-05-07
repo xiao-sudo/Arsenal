@@ -55,7 +55,7 @@ namespace Code.Arsenal.Trigger
         {
             var trigger = hit.collider.GetComponent<ColliderRayCastTrigger>();
             if (null != trigger)
-                trigger.Fire(payload);
+                trigger.TryFire(payload);
         }
     }
 }

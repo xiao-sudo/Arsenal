@@ -24,7 +24,7 @@ namespace Code.Arsenal.Trigger
 
         private void AnyFire(object payload)
         {
-            Fire(payload);
+            TryFire(payload);
         }
 
         public BehaviourTrigger[] ChildTriggers => m_ChildTriggers;

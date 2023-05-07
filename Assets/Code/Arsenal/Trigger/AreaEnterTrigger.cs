@@ -18,7 +18,7 @@ namespace Code.Arsenal.Trigger
 
         private void OnTouristEnter(IAreaTourist area_tourist)
         {
-            Fire(area_tourist);
+            TryFire(area_tourist);
         }
     }
 }

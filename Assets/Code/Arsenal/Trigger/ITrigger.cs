@@ -12,19 +12,24 @@ namespace Code.Arsenal.Trigger
 
     public interface IFire
     {
-        bool Fire(object payload);
+        bool TryFire(object payload);
     }
 
     public interface IFireableTrigger : ITrigger, IFire
     {
     }
 
-    public interface ITriggerContainer<out T>  where T : IFireableTrigger
+    public interface ITriggerContainer<out T> where T : IFireableTrigger
     {
         T[] ChildTriggers { get; }
     }
 
-    public abstract class BehaviourTrigger : MonoBehaviour, IFireableTrigger
+    public interface IFireCounter
+    {
+        int FireCount { get; }
+    }
+
+    public abstract class BehaviourTrigger : MonoBehaviour, IFireableTrigger, IFireCounter
     {
         #region Unity Event Functions
 
@@ -43,21 +48,54 @@ namespace Code.Arsenal.Trigger
 
         public virtual bool CanFire => true;
 
+        public int FireCount { get; private set; }
+
         public Action<object> FireEvent { get; set; }
 
         #endregion
 
         #region IFireEvent
 
-        public virtual bool Fire(object payload)
+        public virtual bool TryFire(object payload)
         {
             if (CanFire)
             {
-                FireEvent?.Invoke(payload);
+                PreFire(payload);
+
+                Fire(payload);
+
+                PostFire();
+
                 return true;
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Fire event
+        /// </summary>
+        /// <param name="payload"></param>
+        protected virtual void Fire(object payload)
+        {
+            ++FireCount;
+            FireEvent?.Invoke(payload);
+        }
+
+        /// <summary>
+        /// Callback before fire event
+        /// </summary>
+        /// <param name="payload"></param>
+        protected virtual void PreFire(object payload)
+        {
+        }
+
+        /// <summary>
+        /// Callback after fire event
+        /// No payload argument, because the payload may be released in FireImpl
+        /// </summary>
+        protected virtual void PostFire()
+        {
         }
 
         #endregion

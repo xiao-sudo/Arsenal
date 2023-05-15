@@ -33,7 +33,7 @@ namespace Examples.Trigger.State
             m_Fsm = new FsmMachine<PlayAnimationState>();
 
             m_Area.OnTouristEnter += OnTouristEnter;
-            m_Area.OnTouristExist += OnTouristExist;
+            m_Area.OnTouristExit += OnTouristExist;
 
             m_Trigger.FireEvent = o => { Debug.Log("Event Fire"); };
         }
@@ -45,7 +45,7 @@ namespace Examples.Trigger.State
 
         private void Update()
         {
-            if (m_Fsm.CurrentState == m_Warning && DemoInput.LeftMouseUp)
+            if (DemoInput.LeftMouseUp)
             {
                 var ray = Camera.main.ScreenPointToRay(DemoInput.MousePosition);
                 ColliderRayCastTrigger.FireOneRayHitTrigger(ray, ~0, 50f, null);

@@ -35,10 +35,10 @@ namespace Code.Arsenal.Area
         {
             var tourist = other.GetComponent<IAreaTourist>();
 
-            if (IsTouristCanExist(tourist))
+            if (IsTouristCanExit(tourist))
             {
                 m_InAreaTourists.Remove(tourist);
-                OnTouristExist?.Invoke(tourist);
+                OnTouristExit?.Invoke(tourist);
             }
         }
     }

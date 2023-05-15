@@ -25,7 +25,7 @@ namespace Code.Arsenal.Area
         /// <summary>
         /// Callback when a tourist exist the area or shape
         /// </summary>
-        Action<IAreaTourist> OnTouristExist { get; set; }
+        Action<IAreaTourist> OnTouristExit { get; set; }
 
         /// <summary>
         /// Check whether the given tourist is in this area or shape
@@ -46,6 +46,6 @@ namespace Code.Arsenal.Area
         /// </summary>
         /// <param name="area_tourist">the given tourist</param>
         /// <returns>true if the given tourist can exist the area or shape</returns>
-        bool IsTouristCanExist(IAreaTourist area_tourist);
+        bool IsTouristCanExit(IAreaTourist area_tourist);
     }
 }
